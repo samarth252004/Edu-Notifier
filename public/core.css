@@ -1,0 +1,212 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #512da8, #7a8be4);
+    /* background-image: url(images/nasa-Q1p7bh3SHj8-unsplash.jpg); */
+    background-size: cover;       /* Ensures the image covers the entire screen */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the background fixed during scroll */
+    color: #000000;
+    margin: 0;
+    padding: 0;
+}
+/* 
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+} */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    color: #000000;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #512da8;
+    color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.close {
+    color: #fff;
+    opacity: 1;
+}
+
+/* Form Styles */
+.form-control-file, .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s;
+}
+
+.form-control-file:focus, .form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+/* Radio Buttons */
+.form-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Uploaded Files List */
+.list-group-item {
+    border: 1px solid #111111;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s;
+    background-color: #ffffff;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideIn 1s forwards;
+    transition: transform 1s ease, box-shadow 0.3s ease;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.list-group-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.list-group-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.list-group-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+/* Continue the sequence as needed */
+
+.list-group-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: #512da8;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #512da8;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 10px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #ffffff;
+    background-color: #512da8;
+}
+.list-group-item i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+/* Sort Options */
+.form-inline .form-group label {
+    margin-right: 10px;
+}
+
+/* Message Modal */
+.modal-header {
+    background-color: #512da8;
+    color: #fff;
+}
+
+#messageContent {
+    font-size: 1.1rem;
+}
+
+#okButton {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#okButton:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.bi-plus-circle::before{
+    color: white;
+}
+/* Event Details Section */
+#eventDetails {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+/* Additional Custom Styles */
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-shadow: #0e0f0f;
+}
+
+i.bi {
+    font-size: 1.2rem;
+    color: #6f42c1;
+}
+.lg{
+    /* background-color: #c9d6ff; */
+    /* background: linear-gradient(to right, #e2e2e2, #c9d6ff); */
+    background-color: #6f42c1;
+}
+.bg-light{
+    background-color: aqua;
+}
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    .list-group-item {
+        padding: 10px;
+    }
+}

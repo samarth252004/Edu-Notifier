@@ -1,0 +1,126 @@
+/* General Styles */
+body {
+    background-image: url("images/aniket-deole-M6XC789HLe8-unsplash.jpg");
+    background-color: #ddd;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+.container {
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    margin-top: 100px;
+    border: 2px solid white;
+    backdrop-filter: blur(7px);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.form-control {
+    border-radius: 20px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.form-check-label {
+    font-weight: 400;
+    color: #333;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: #007bff;
+}
+
+.btn {
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    padding-right: 2.5rem; /* Make space for the eye icon */
+}
+
+.eye-icon {
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.eye-icon:hover {
+    color: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+    .container {
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}

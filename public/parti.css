@@ -1,0 +1,58 @@
+/* parti.css */
+
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+}
+
+/* Container styling */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+h2 {
+    text-align: center;
+    color: #0e0f0f;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* List group styling */
+.list-group-item {
+    background-color: #f1f1f1;
+    border: none;
+    margin-bottom: 10px;
+    border-left: 5px solid #512da8;
+    padding: 15px;
+    border-radius: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.list-group-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item strong { 
+    color: #512da8;
+}
+
+.list-group-item br {
+    margin-bottom: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    .list-group-item {
+        padding: 10px;
+    }
+}

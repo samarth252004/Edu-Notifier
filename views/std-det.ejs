@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <title>Edu-Notifier</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="std-det.css">
+
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><i class="bi bi-mortarboard-fill"></i><img src="images/Edu-Notifier Logo 2.png" style="width: 20%;"/></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary" href="/core"><i class="bi bi-house-door-fill"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary" href="/"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <hr>
+        <h1 class="mt-4"><i class="bi bi-people-fill"></i> Registered Users</h1>
+
+        <!-- Sorting Buttons -->
+        <div class="mb-3">
+            <button class="btn btn-primary" onclick="sortTable('student_id')" style=" background-color: #b793f9;color: #492985;"><i class="bi bi-sort-numeric-down"></i> Sort by ID</button>
+            <button class="btn btn-primary" onclick="sortTable('full_name')" style=" background-color: #b793f9;color: #492985;"><i class="bi bi-sort-alpha-down"></i> Sort by Name</button>
+            <button class="btn btn-primary" onclick="sortTable('branch')" style=" background-color: #b793f9;color: #492985;"><i class="bi bi-sort-alpha-down"></i> Sort by Branch</button>
+            <button class="btn btn-primary" onclick="window.print()" style=" background-color: #b793f9;color: #492985;"><i class="bi bi-printer-fill"></i> Print</button>
+        </div>
+
+        <!-- Users Table -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><i class="bi bi-hash"></i> ID</th>
+                    <th><i class="bi bi-person-fill"></i> Name</th>
+                    <th><i class="bi bi-envelope-fill"></i> Email</th>
+                    <th><i class="bi bi-book-fill"></i> Branch</th>
+                    <th><i class="bi bi-gender-ambiguous"></i> Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.student_id %></td>
+                        <td><%= user.full_name %></td>
+                        <td><%= user.Email %></td>
+                        <td><%= user.branch %></td>
+                        <td><%= user.gender %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Sorting Function -->
+    <script>
+        function sortTable(field) {
+            const table = document.querySelector('table tbody');
+            const rows = Array.from(table.rows);
+            const isAscending = table.dataset.sortOrder === 'asc';
+            table.dataset.sortOrder = isAscending ? 'desc' : 'asc';
+
+            rows.sort((a, b) => {
+                const aValue = a.cells[field === 'student_id' ? 0 : field === 'full_name' ? 1 : field === 'branch' ? 3 : 4].textContent;
+                const bValue = b.cells[field === 'student_id' ? 0 : field === 'full_name' ? 1 : field === 'branch' ? 3 : 4].textContent;
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            });
+
+            table.append(...rows);
+        }
+    </script>
+</body>
+</html>

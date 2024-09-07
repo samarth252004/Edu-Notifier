@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <title>Edu-Notifier</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="core.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+</head>
+
+<body>
+    <form action="/core" method="get"></form>
+    <div class="container mt-5">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><i class="bi bi-mortarboard-fill"></i><img
+                    src="images/Edu-Notifier Logo 2.png" style="width: 20%;"/></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary" href="/std-det"><i class="bi bi-people-fill"></i>
+                            Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary" href="/"><i class="bi bi-box-arrow-right"></i>
+                            Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <hr>
+
+        <!-- Upload Button -->
+        <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#uploadModal">
+            <i class="bi bi-plus-circle"></i> Upload
+        </button>
+
+        <!-- Upload Modal -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadModalLabel">Upload
+                            a File</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="file" name="file" id="fileInput" class="form-control-file" required
+                                    accept=".jpg, .jpeg, .pdf">
+                                <span id="fileError" style="color:red; display:none;">Invalid
+                                    file format. Please upload a .jpg,
+                                    .jpeg, or .pdf file.</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="description" placeholder="Description" class="form-control"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label>Class</label><br>
+                                <input type="radio" name="cls" value="All" required> All
+                                <input type="radio" name="cls" value="B.A" required> B.A
+                                <input type="radio" name="cls" value="B.Com" required> B.Com
+                                <input type="radio" name="cls" value="B.Sc" required> B.Sc
+                                <input type="radio" name="cls" value="B.C.A" required> B.C.A
+                            </div>
+                            <div class="form-group">
+                                <label>Notification Type</label><br>
+                                <input type="radio" name="noti" value="Notice" required> Notice
+                                <input type="radio" name="noti" value="Event" id="eventRadio" required>
+                                Event
+                            </div>
+                            <div class="form-group" id="eventDetails" style="display:none;">
+                                <label>Event Name</label>
+                                <input type="text" name="eventName" class="form-control">
+                                <!-- Add more event details here -->
+                            </div>
+                            <input type="hidden" name="uploadDate" id="uploadDate">
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Uploaded Files</h2>
+            <div class="form-inline">
+                <div class="form-group mr-2">
+                    <label for="sortField" class="mr-2">Sort by:</label>
+                    <select name="sortField" id="sortField" class="form-control form-control-sm">
+                        <option value="name" <%=sortField==='name' ? 'selected' : '' %>>Name</option>
+                        <option value="upload_date" <%=sortField==='upload_date' ? 'selected' : '' %>>Upload
+                            Date</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sortOrder" class="mr-2">Order:</label>
+                    <select name="sortOrder" id="sortOrder" class="form-control form-control-sm">
+                        <option value="ASC" <%=sortOrder==='ASC' ? 'selected' : '' %>>Ascending</option>
+                        <option value="DESC" <%=sortOrder==='DESC' ? 'selected' : '' %>>Descending</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <ul class="list-group">
+            <% files.forEach(file=> { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        <i class="bi bi-file-earmark-text"></i>
+                        <%= file.description %><br><br>
+                            <strong>Notification For:</strong>
+                            <%= file.class %>
+                                <br>
+                                <strong>Notification Type:</strong>
+                                <%= file.noti_type %> <br>
+                                    <strong>Uploaded Date:</strong>
+                                    <%= file.upload_date %>
+                    </span>
+                    <span>
+                        <a href="/download/<%= file.id %>" class="btn btn-link" title="Download">
+                            <i class="bi bi-download"></i>
+                        </a>
+                        <a href="/delete/<%= file.id %>" class="btn btn-link" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                        <% if (file.noti_type==='Event' ) { %>
+                            <a href="/participants/<%= file.id %>" class="btn btn-link" title="Participants">
+                                <i class="bi bi-people"></i>
+                            </a>
+                            <% } %>
+                    </span>
+                </li>
+                <% }) %>
+        </ul>
+    </div>
+
+    <!-- Modal for success or error message -->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">Notification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="messageContent"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="okButton">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const uploadDateInput = document.getElementById('uploadDate');
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            uploadDateInput.value = `${year}-${month}-${day}`;
+
+            // Show event details when event radio button is selected
+            const eventRadio = document.getElementById('eventRadio');
+            const eventDetails = document.getElementById('eventDetails');
+            eventRadio.addEventListener('change', () => {
+                if (eventRadio.checked) {
+                    eventDetails.style.display = 'block';
+                } else {
+                    eventDetails.style.display = 'none';
+                }
+            });
+
+            // Trigger form submission on change of sort fields
+            const sortField = document.getElementById('sortField');
+            const sortOrder = document.getElementById('sortOrder');
+            sortField.addEventListener('change', () => {
+                window.location.href = `/files?sortField=${sortField.value}&sortOrder=${sortOrder.value}`;
+            });
+            sortOrder.addEventListener('change', () => {
+                window.location.href = `/files?sortField=${sortField.value}&sortOrder=${sortOrder.value}`;
+            });
+
+            // Show message modal if there's a message
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+            if (message) {
+                let messageContent = '';
+                if (message === 'uploaded') {
+                    messageContent = 'File uploaded successfully!';
+                } else if (message === 'deleted') {
+                    messageContent = 'File deleted successfully!';
+                } else {
+                    messageContent = 'File uploaded & mail sent successfully.';
+                }
+                document.getElementById('messageContent').textContent = messageContent;
+                $('#messageModal').modal('show');
+            }
+
+            // Reload the page when the OK button is clicked
+            document.getElementById('okButton').addEventListener('click', () => {
+                window.location.href = '/files';
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const eventRadio = document.getElementById('eventRadio');
+            const eventDetails = document.getElementById('eventDetails');
+
+            eventRadio.addEventListener('change', () => {
+                if (eventRadio.checked) {
+                    eventDetails.style.display = 'block';
+                }
+            });
+
+            const uploadForm = document.querySelector('form');
+            uploadForm.addEventListener('submit', (e) => {
+                const eventName = document.querySelector('input[name="eventName"]').value;
+                if (eventRadio.checked && !eventName) {
+                    alert('Please provide an event name.');
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function () {
+            var fileInput = document.getElementById('fileInput');
+            var filePath = fileInput.value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.pdf)$/i;
+            var errorMessage = document.getElementById('fileError');
+
+            if (!allowedExtensions.exec(filePath)) {
+                errorMessage.style.display = 'block';
+                fileInput.value = '';
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/chs.css">
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <title>Edu-Notifier</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        .password-container {
+            position: relative;
+        }
+
+        .password-input {
+            padding-right: 2.5rem;
+            /* Make space for the eye icon */
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .radiobt {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 300px;
+            margin: 0 auto;
+            color: #5c6bc0;
+        }
+
+        .radiobt .form-check-inline {
+            display: flex;
+            align-items: center;
+        }
+
+        .radiobt .form-check-inline label {
+            margin-left: 5px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <!-- REGISTRATION SECTION -->
+        <div class="form-container sign-up">
+            <form id="regForm" action="/reg" method="post" class="new form">
+                <h1 style="font-weight: bolder; font-family: cursive;">Registration</h1>
+                <div class="input-icon">
+                    <input type="text" name="id" id="id" class="form-control" placeholder="Student ID No." required maxlength="6">
+                </div>
+                <div id="idError" class="error"></div>
+
+                <div class="input-icon">
+                    <input type="text" name="un" id="un" class="form-control" placeholder="User Full Name" required maxlength="30">
+                </div>
+                <div id="usernameError" class="error"></div>
+
+                <div class="input-icon">
+                    <input type="email" name="emid" id="emid" class="form-control" placeholder="Enter Email Id" required>
+                </div>
+                <div id="emailError" class="error"></div>
+
+                <div class="input-icon">
+                    <select name="category" id="category" class="form-control" required>
+                        <option value disabled selected>Branch</option>
+                        <option value="B.A">B.A</option>
+                        <option value="B.Sc">B.Sc</option>
+                        <option value="B.Com">B.Com</option>
+                        <option value="B.C.A">B.C.A</option>
+                    </select>
+                </div> <br>
+                <div id="categoryError" class="error"></div>
+
+                <label>Gender</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="gender" value="male" class="form-check-input" id="male" required>
+                    <label class="form-check-label" for="male">Male</label>
+
+                    <input type="radio" name="gender" value="female" class="form-check-input" id="female" required>
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div id="genderError" class="error"></div>
+
+                <div class="form-group password-container">
+                    <div class="input-icon">
+                        <input type="password" name="pass" id="password" class="form-control" placeholder="Password" required maxlength="8">
+                        <i id="togglePassword" class="bi bi-eye-slash eye-icon"></i>
+                    </div>
+                    <div id="passwordError" class="error"></div>
+                </div>
+                <div class="form-group password-container">
+                    <div class="input-icon">
+                        <input type="password" name="confirmPass" id="confirmPassword" class="form-control" placeholder="Confirm Password" required maxlength="8">
+                        <i id="toggleConfirmPassword" class="bi bi-eye-slash eye-icon"></i>
+                    </div>
+                    <div id="confirmPasswordError" class="error"></div>
+                </div>
+
+                <div id="regError" class="error"></div>
+
+                <button type="reset" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Reset</button>
+                <button type="submit" id="registerButton" class="btn btn-primary" disabled><i class="bi bi-check-circle"></i>Register</button>
+            </form>
+        </div>
+
+        <!-- LOGIN SECTION -->
+        <div class="form-container sign-in">
+            <form id="loginForm" action="/login" method="post">
+                <h1 style="font-weight: bolder; font-family: cursive;">Log-in</h1><br>
+
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="role" value="admin" class="form-check-input" id="admin" required>
+                        <label class="form-check-label" for="admin">Admin</label>
+
+                        <input type="radio" name="role" value="student" class="form-check-input" id="student" required>
+                        <label class="form-check-label" for="student">Student</label>
+                    </div>
+                    <div id="roleError" class="error"></div>
+                </div>
+
+                <div class="input-icon ">
+                    <input type="text" name="id" id="loginId" class="form-control" placeholder="Student ID No." required
+                        maxlength="6">
+                </div>
+                <div id="loginIdError" class="error"></div>
+
+                <div class="input-icon">
+                    <input type="text" name="un" id="loginUn" class="form-control" placeholder="User Full Name"
+                        required maxlength="30">
+                </div>
+                <div id="loginUsernameError" class="error"></div>
+
+                <div class="form-group password-container">
+                    <div class="input-icon">
+                        <input type="password" name="pass" id="loginPassword" class="form-control" placeholder="Password" required maxlength="8">
+                        <i id="toggleLoginPassword" class="bi bi-eye-slash eye-icon"></i>
+                    </div>
+                    <div id="loginPasswordError" class="error"></div>
+                </div>
+
+                <div id="loginError" class="error"></div>
+
+                <button type="reset" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Reset</button>
+                <button type="submit" id="loginButton" class="btn btn-primary" disabled><i
+                        class="bi bi-box-arrow-in-right"></i>Login</button>
+            </form>
+        </div>
+
+        <!-- TOGGLE SECTION -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <img src="images/Edu-Notifier Logo 2.png" alt="Logo" class="mb-4" style="max-width: 50%; box-shadow: 10px 10px 10px black; border-radius:10px;">
+                    <h1>Welcome Back!</h1>
+                    <p>Get your College Updates by Loggin in here 👇</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <img src="images/Edu-Notifier Logo 2.png" alt="Logo" class="mb-4" style="max-width: 50%; box-shadow: 10px 10px 10px black; border-radius:10px;">
+                    <h1>Hello, Friend!</h1>
+                    <p> Don't have account Click here to Register 👇</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="errorModalBody">
+                    <!-- Error message will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all input fields
+            var inputs = document.getElementsByTagName('input');
+
+            // Add event listener to each input field
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('input', validate);
+            }
+
+            // Add event listener for eye icons
+            document.getElementById('togglePassword').addEventListener('click', togglePassword);
+            document.getElementById('toggleConfirmPassword').addEventListener('click', togglePassword);
+            document.getElementById('toggleLoginPassword').addEventListener('click', togglePassword);
+
+            function togglePassword(event) {
+                var passwordInput = event.target.previousElementSibling;
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    event.target.className = 'bi bi-eye eye-icon';
+                } else {
+                    passwordInput.type = 'password';
+                    event.target.className = 'bi bi-eye-slash eye-icon';
+                }
+            }
+
+            function validate(e) {
+                // Remove previous error messages
+                var errorElement = e.target.parentElement.nextElementSibling;
+                if (errorElement && errorElement.classList.contains('error')) {
+                    errorElement.innerText = '';
+                }
+
+                // Validate based on input type and id
+                switch (e.target.type) {
+                    case 'text':
+                        if (e.target.id === 'un' || e.target.id === 'loginUn') {
+                            validateName(e.target, errorElement);
+                        } else if (e.target.id === 'id' || e.target.id === 'loginId') {
+                            validateUserId(e.target, errorElement);
+                        }
+                        break;
+                    case 'email':
+                        validateEmail(e.target, errorElement);
+                        break;
+                    case 'password':
+                        if (e.target.id === 'password') {
+                            validatePassword(e.target, errorElement);
+                        } else if (e.target.id === 'confirmPassword') {
+                            validateConfirmPassword(e.target, errorElement);
+                        } else if (e.target.id === 'loginPassword') {
+                            validateLoginPassword(e.target, errorElement);
+                        }
+                        break;
+                }
+
+                // Enable/disable Register button based on validation results
+                var regFormValid = true;
+                var regFormInputs = document.querySelectorAll('#regForm input');
+                for (var i = 0; i < regFormInputs.length; i++) {
+                    var errorElement = regFormInputs[i].parentElement.nextElementSibling;
+                    if (errorElement && errorElement.classList.contains('error') && errorElement.innerText.trim()) {
+                        regFormValid = false;
+                        break;
+                    }
+                }
+                document.getElementById('registerButton').disabled = !regFormValid;
+
+                // Enable/disable Login button based on validation results
+                var loginFormValid = true;
+                var loginFormInputs = document.querySelectorAll('#loginForm input');
+                for (var i = 0; i < loginFormInputs.length; i++) {
+                    var errorElement = loginFormInputs[i].parentElement.nextElementSibling;
+                    if (errorElement && errorElement.classList.contains('error') && errorElement.innerText.trim()) {
+                        loginFormValid = false;
+                        break;
+                    }
+                }
+                document.getElementById('loginButton').disabled = !loginFormValid;
+            }
+
+            function validateName(input, errorElement) {
+                var nameParts = input.value.trim().split(' ');
+                if (nameParts.length < 3) {
+                    showError(errorElement, 'User Name Should be of Length 30 Only, Please enter first, middle, and last name.');
+                }
+            }
+
+            function validateEmail(input, errorElement) {
+                var email = input.value.trim();
+                var domain = email.split('@')[1];
+                var validDomains = ['gmail.com', 'yahoo.com', 'outlook.com']; // Add more domains as needed
+                if (!validDomains.includes(domain)) {
+                    showError(errorElement, 'Please enter a valid email address.');
+                }
+            }
+
+            function validateUserId(input, errorElement) {
+                var id = input.value.trim();
+                if (id.length !== 6) {
+                    showError(errorElement, 'User ID should be 6 digits long.');
+                }
+            }
+
+            function validatePassword(input, errorElement) {
+                var password = input.value.trim();
+                var hasUpperCase = /[A-Z]/.test(password);
+                var hasLowerCase = /[a-z]/.test(password);
+                var hasSymbol = /[!@#$%^&*()]/.test(password);
+                var hasDigit = /[0-9]/.test(password);
+                if (!hasUpperCase || !hasLowerCase || !hasSymbol || !hasDigit || password.length !== 8) {
+                    showError(errorElement, 'Password must contain one uppercase letter, one lowercase letter, one symbol, one digit, and should be 8 characters long.');
+                }
+            }
+
+            function validateConfirmPassword(input, errorElement) {
+                var password = document.getElementById('password').value.trim();
+                var confirmPassword = input.value.trim();
+                if (password !== confirmPassword) {
+                    showError(errorElement, 'Passwords do not match.');
+                }
+            }
+
+            function showError(errorElement, message) {
+                if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.classList.add('error');
+                    e.target.parentElement.appendChild(errorElement);
+                }
+                errorElement.innerText = message;
+            }
+        });
+    </script>
+    <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        var regError = getUrlParameter('regError');
+        var loginError = getUrlParameter('loginError');
+
+        if (regError) {
+            showErrorModal(regError);
+        }
+
+        if (loginError) {
+            showErrorModal(loginError);
+        }
+
+        function showErrorModal(message) {
+            document.getElementById('errorModalBody').innerText = message;
+            $('#errorModal').modal('show');
+        }
+    </script>
+    <script>
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+
+        registerBtn.addEventListener('click', () => {
+            container.classList.add("active");
+        });
+
+        loginBtn.addEventListener('click', () => {
+            container.classList.remove("active");
+        });
+    </script>
+</body>
+
+</html>
